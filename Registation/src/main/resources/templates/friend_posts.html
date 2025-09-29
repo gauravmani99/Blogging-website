@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Friend's Posts</title>
+    <link rel="stylesheet" th:href="@{/static/style.css}" />
+</head>
+<body>
+    <h2 th:text="${friend.fullname} + ' Posts'"></h2>
+    <div th:if="${#lists.isEmpty(posts)}">
+        <p>No posts to show.</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(posts)}">
+        <ul>
+            <li th:each="post : ${posts}">
+                <strong th:text="${post.title}"></strong><br/>
+                <span th:text="${post.content}"></span>
+            </li>
+        </ul>
+    </div>
+    <a th:href="@{/friends}">Back to Friends</a>
+</body>
+</html>

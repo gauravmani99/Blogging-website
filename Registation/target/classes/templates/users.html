@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+    <link rel="stylesheet" th:href="@{/static/style.css}" />
+</head>
+<body>
+    <h2>All Users</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.fullname}"></td>
+            <td th:text="${user.email}"></td>
+            <td>
+                <span th:if="${user.id} != ${currentUser.id}">
+                    <form th:action="@{'/friend/request/' + ${user.id}}" method="post">
+                        <button type="submit">Send Friend Request</button>
+                    </form>
+                </span>
+                <span th:if="${user.id} == ${currentUser.id}">You</span>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/friend/requests}">View Friend Requests</a> |
+    <a th:href="@{/friends}">View Friends</a>
+</body>
+</html>

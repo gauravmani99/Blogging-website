@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Friend Requests</title>
+    <link rel="stylesheet" th:href="@{/static/style.css}" />
+</head>
+<body>
+    <h2>Friend Requests</h2>
+    <table border="1">
+        <tr>
+            <th>From</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="req : ${requests}">
+            <td th:text="${req.user.fullname}"></td>
+            <td>
+                <form th:action="@{'/friend/accept/' + ${req.id}}" method="post">
+                    <button type="submit">Accept</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/users}">Back to Users</a>
+</body>
+</html>
